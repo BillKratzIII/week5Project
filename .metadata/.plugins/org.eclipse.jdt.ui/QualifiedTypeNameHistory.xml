@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
-<fullyQualifiedTypeName name="com.bakery.BakeryItem"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.bakery.BakeryItem"/>
+<fullyQualifiedTypeName name="com.bakery.DAO"/>
 </qualifiedTypeNameHistroy>

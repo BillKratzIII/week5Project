@@ -3,3 +3,4 @@
 1472750475738	Delete element
 1472754321635	Rename package 'bakeryservlets'
 1472756263758	Rename type 'bakeryItem'
+1472834708676	Move 'deleteItem.jsp' to 'webapp'

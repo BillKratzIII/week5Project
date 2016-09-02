@@ -1,15 +1,13 @@
 package com.bakery;
 
-import java.text.DecimalFormat;
-
 public class BakeryItem {
 	private String productID = null;
 	private String type = null;
 	private String calories = null;
 	private String price = null;
 	private String topping = null;
-	
-	//constructor
+
+	// constructor
 	public BakeryItem(String productID, String type, String calories, String price, String topping) {
 		this.productID = productID;
 		this.type = type;
@@ -18,48 +16,58 @@ public class BakeryItem {
 		this.topping = topping;
 	}
 
-	//default contructor
+	// default contructor
 	public BakeryItem() {
 	}
 
+	// method returns product ID
 	public String getProductID() {
 		return productID;
 	}
 
+	// method sets product ID
 	public void setProductID(String productID) {
 		this.productID = productID;
 	}
 
+	// method returns type of baked good
 	public String getType() {
 		return type;
 	}
 
+	// method sets type of baked good
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	// method returns calories
 	public String getCalories() {
 		return calories;
 	}
 
+	// method sets calories
 	public void setCalories(String calories) {
 		this.calories = calories;
 	}
 
+	// method returns price
 	public String getPrice() {
 		return price;
 	}
 
+	// method sets price
 	public void setPrice(String price) {
 		this.price = price;
 	}
 
+	// method returns topping
 	public String getTopping() {
 		return topping;
 	}
 
+	// method sets topping
 	public void setTopping(String topping) {
 		this.topping = topping;
 	}
 
-}//end class
+}// end class

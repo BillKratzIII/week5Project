@@ -1,13 +1,13 @@
 package com.bakeryservlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bakery.BakeryItem;
 import com.bakery.DAO;
 
 /**
@@ -16,32 +16,36 @@ import com.bakery.DAO;
 @WebServlet("/updateID")
 public class updateID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public updateID() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	// constructor
+	public updateID() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//BakeryItem itemToModify = new BakeryItem();
-		
-		DAO.itemToModify.setProductID(request.getParameter("productID"));
-		
-		request.getRequestDispatcher("updateDB.jsp").forward(request, response);
-	}
+	// method to take input from modifyItem.jsp and set the product ID of the
+	// global variable itemToModify, then open the page updateDB.jsp
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-}
+		DAO.itemToModify.setProductID(request.getParameter("productID"));
+
+		request.getRequestDispatcher("updateDB.jsp").forward(request, response);
+	}// doPost()
+
+}// class

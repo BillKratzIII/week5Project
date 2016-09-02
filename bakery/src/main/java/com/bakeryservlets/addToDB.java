@@ -16,37 +16,43 @@ import com.bakery.DAO;
 @WebServlet("/addToDB")
 public class addToDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public addToDB() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	// constructor
+	public addToDB() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	// method takes input from web form in addToDB.html and adds a new item to
+	// the SQL database through DAO.writeToDB() method
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		BakeryItem itemToAdd = new BakeryItem();
-		
+
 		itemToAdd.setType(request.getParameter("type"));
 		itemToAdd.setCalories(request.getParameter("calories"));
 		itemToAdd.setPrice(request.getParameter("price"));
 		itemToAdd.setTopping(request.getParameter("topping"));
-		
-		DAO.writeToDatabase(itemToAdd);
-		
-		request.getRequestDispatcher("readDB.jsp").forward(request, response);
-	}
 
-}
+		DAO.writeToDatabase(itemToAdd);
+
+		request.getRequestDispatcher("readDB.jsp").forward(request, response);
+	}// doPost()
+
+}// class

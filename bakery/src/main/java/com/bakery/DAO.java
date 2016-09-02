@@ -1,6 +1,11 @@
 package com.bakery;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DAO {
@@ -16,6 +21,7 @@ public class DAO {
 	static PreparedStatement PREP_STMT = null;
 	static ResultSet RES_SET = null;
 
+	// method to connect to SQL database
 	public static void connToDB() {
 		System.out.println("Connecting to DB...");
 
@@ -29,6 +35,7 @@ public class DAO {
 		}
 	}// connToDB()
 
+	// method to read data from database
 	public static void readFromDB() {
 
 		connToDB();
@@ -62,9 +69,12 @@ public class DAO {
 
 	}// readFromDB()
 
+	// string to be used as prepared statement to insert new bakery item into
+	// the SQL database
 	private static String insertIntoTable = "INSERT INTO `bakery`.`products` " + "(type, calories, price, topping) "
 			+ "VALUES " + "(?, ?, ?, ?)";
 
+	// method to take in a new bakery item and add it to the SQL database
 	public static void writeToDatabase(BakeryItem itemToAdd) {
 
 		try {
@@ -84,73 +94,57 @@ public class DAO {
 			System.out.println("Item added");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}// writeToDB();
-	
-	private static String deleteFromTable(int id){
-		return "DELETE FROM `bakery`.`products`"
-				+ " WHERE product_id = " 
-				+ id + " ;";
-	}//deleteFromTable()
 
+	// method that takes in a product ID to return a string to be used as a
+	// prepared statement to delete an item from our SQL database
+	private static String deleteFromTable(int id) {
+		return "DELETE FROM `bakery`.`products`" + " WHERE product_id = " + id + " ;";
+	}// deleteFromTable()
+
+	// method to take in a bakery item object and delete it from the SQL
+	// database
 	public static void deleteFromDB(BakeryItem itemToDelete) {
 		System.out.println(itemToDelete.getProductID());
 		connToDB();
 
-		/*for (int i = 0; i < allPlayers.size(); i++) {
-			if (playerToDelete.getLastName().equalsIgnoreCase(allPlayers.get(i).getLastName())
-					&& playerToDelete.getFirstName().equalsIgnoreCase(allPlayers.get(i).getFirstName())) {
-				playerIDToDelete = allPlayers.get(i).getPlayerID();
-				System.out.println("found player");
-			}
+		try {
+			PREP_STMT = CONN.prepareStatement(deleteFromTable(Integer.parseInt(itemToDelete.getProductID())));
+			// PREP_STMT.setString(1, playerIDToDelete);
+			PREP_STMT.executeUpdate();
+			System.out.println("Item deleted");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	}// deleteFromDB()
 
-		if (playerIDToDelete == null) {
-			System.out.println("No player found by that name.");
-		} else {
-			System.out.println(playerIDToDelete);
+	// string to be used as a prepared statement to modify an item in the SQL
+	// database
+	private static String modifyInDB = "UPDATE `bakery`.`products` " + "SET " + "type = (?), " + "calories = (?), "
+			+ "price = (?), " + "topping = (?) " + "WHERE " + "product_id = (?)";
 
-			connToDB();*/
-
-			try {
-				PREP_STMT = CONN.prepareStatement(deleteFromTable(Integer.parseInt(itemToDelete.getProductID())));
-				//PREP_STMT.setString(1, playerIDToDelete);
-				PREP_STMT.executeUpdate();
-				System.out.println("Item deleted");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-	}//deleteFromDB()
-	
-	private static String modifyInDB = "UPDATE `bakery`.`products` " 
-			+ "SET " 
-			+ "type = (?), "
-			+ "calories = (?), "
-			+ "price = (?), "
-			+ "topping = (?) " 
-			+ "WHERE "
-			+ "product_id = (?)";
-	
+	// method to modify an item in the SQL database based of global variable
+	// itemToModify given attributes from the JSPs
 	public static void modifyInDB() {
-		
-			connToDB();
 
-			try {
-				PREP_STMT = CONN.prepareStatement(modifyInDB);
+		connToDB();
 
-				PREP_STMT.setString(1, itemToModify.getType());
-				PREP_STMT.setString(2, itemToModify.getCalories());
-				PREP_STMT.setString(3, itemToModify.getPrice());
-				PREP_STMT.setString(4, itemToModify.getTopping());
-				PREP_STMT.setString(5, itemToModify.getProductID());
+		try {
+			PREP_STMT = CONN.prepareStatement(modifyInDB);
 
-				PREP_STMT.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-	}//modifyInDB()
+			PREP_STMT.setString(1, itemToModify.getType());
+			PREP_STMT.setString(2, itemToModify.getCalories());
+			PREP_STMT.setString(3, itemToModify.getPrice());
+			PREP_STMT.setString(4, itemToModify.getTopping());
+			PREP_STMT.setString(5, itemToModify.getProductID());
+
+			PREP_STMT.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}// modifyInDB()
 
 }// class

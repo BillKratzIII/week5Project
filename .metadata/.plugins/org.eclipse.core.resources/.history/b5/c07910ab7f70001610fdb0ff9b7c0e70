@@ -1,0 +1,168 @@
+package com.bakery;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+public class DAO {
+	// declare variables
+	public ArrayList bakeryItems = new ArrayList<>();
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root&autoReconnect=true&useSSL=false";
+	static final String USER = "root";
+	static final String PASSWORD = "sesame";
+	static Connection CONN = null;
+	static Statement STMT = null;
+	static PreparedStatement PREP_STMT = null;
+	static ResultSet RES_SET = null;
+
+	public static void connToDB() {
+		System.out.println("Connecting to DB...");
+
+		try {
+			Class.forName(JDBC_DRIVER);
+			CONN = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			System.out.println("Connected to the database.");
+		} catch (Exception e) {
+			System.out.println("Failed to connect to the database.");
+			e.printStackTrace();
+		}
+	}// connToDB()
+
+	public static void readFromDB() {
+
+		connToDB();
+
+		try {
+
+			STMT = CONN.createStatement();
+			RES_SET = STMT.executeQuery("SELECT * FROM bakery.products;");
+
+			while (RES_SET.next()) {
+
+				BakeryItem item = new BakeryItem();
+
+				item.setProductID(RES_SET.getString("product_id"));
+				item.setType(RES_SET.getString("type"));
+				item.setCalories(RES_SET.getString("calories"));
+				item.setPrice(RES_SET.getString("price"));
+				item.setTopping(RES_SET.getString("topping"));
+
+				bakeryItems.add(item);
+
+			}
+
+			for (int i = 0; i < bakeryItems.size(); i++) {
+				System.out.println(bakeryItems.get(i));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}// readFromDB()
+
+	private static String insertIntoTable = "INSERT INTO `bakery`.`products` " + "(type, calories, price, topping) "
+			+ "VALUES " + "(?, ?, ?, ?)";
+
+	public static void writeToDatabase(BakeryItem itemToAdd) {
+
+		try {
+
+			connToDB();
+
+			PREP_STMT = CONN.prepareStatement(insertIntoTable);
+
+			PREP_STMT.setString(1, itemToAdd.getType());
+			PREP_STMT.setString(2, itemToAdd.getCalories());
+			PREP_STMT.setString(3, itemToAdd.getPrice());
+			PREP_STMT.setString(4, itemToAdd.getTopping());
+
+			System.out.println(PREP_STMT);
+
+			PREP_STMT.executeUpdate();
+			System.out.println("Item added");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}// writeToDB();
+	
+	private static String deleteFromTable(int id){
+		return "DELETE FROM `our_schema`.`zoo`"
+				+ " WHERE animal_id = " 
+				+ id + " ;";
+	}//deleteFromTable()
+
+	public static void deleteFromDB(BakeryItem itemToDelete) {
+
+		connToDB();
+
+		/*for (int i = 0; i < allPlayers.size(); i++) {
+			if (playerToDelete.getLastName().equalsIgnoreCase(allPlayers.get(i).getLastName())
+					&& playerToDelete.getFirstName().equalsIgnoreCase(allPlayers.get(i).getFirstName())) {
+				playerIDToDelete = allPlayers.get(i).getPlayerID();
+				System.out.println("found player");
+			}
+		}
+
+		if (playerIDToDelete == null) {
+			System.out.println("No player found by that name.");
+		} else {
+			System.out.println(playerIDToDelete);
+
+			connToDB();*/
+
+			try {
+				PREP_STMT = CONN.prepareStatement(deleteFromTable(Integer.parseInt(itemToDelete.getProductID())));
+				//PREP_STMT.setString(1, playerIDToDelete);
+				PREP_STMT.executeUpdate();
+				System.out.println("Item deleted");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}//deleteFromDB()
+	
+	private static String modifyInDB = "UPDATE `bakery`.`products` " 
+			+ "SET " 
+			+ "type = (?), "
+			+ "calories = (?), "
+			+ "price = (?), "
+			+ "topping = (?) " 
+			+ "WHERE "
+			+ "product_id = (?)";
+	
+	public static void modifyInDB(BakeryItem itemToModify) {
+		
+
+		/*for (int i = 0; i < allPlayers.size(); i++) {
+			if (playerToModify.getLastName().equalsIgnoreCase(allPlayers.get(i).getLastName())
+					&& playerToModify.getFirstName().equalsIgnoreCase(allPlayers.get(i).getFirstName())) {
+				playerIDToModify = allPlayers.get(i).getPlayerID();
+				System.out.println("found player");
+			}
+		}
+
+		if (playerIDToModify == null) {
+			System.out.println("No player found by that name.");
+		} else {*/
+		
+			connToDB();
+
+			try {
+				PREP_STMT = CONN.prepareStatement(modifyInDB);
+
+				PREP_STMT.setString(1, itemToModify.getType());
+				PREP_STMT.setString(2, itemToModify.getCalories());
+				PREP_STMT.setString(3, itemToModify.getPrice());
+				PREP_STMT.setString(4, itemToModify.getTopping());
+				PREP_STMT.setString(5, itemToModify.getProductID());
+
+				PREP_STMT.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}//modifyInDB()
+
+}// class

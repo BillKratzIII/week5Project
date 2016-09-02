@@ -1,0 +1,12 @@
+package com.bakery;
+
+public class bakeryItem {
+	private String productID = null;
+	private String type = null;
+	private String calories = null;
+	private String price = null;
+	private String topping = null;
+	
+	
+
+}

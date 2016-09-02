@@ -91,7 +91,7 @@
 		</table>
 		<form action="updateID" method="post">
 			<div class="well well-sm">
-			<h3>Select the product id of the item you would like to modify:</h3>
+				<h3>Select the product id of the item you would like to modify:</h3>
 			</div>
 			<select class="form-control" name="productID">
 				<%
@@ -111,7 +111,7 @@
 					DAO.bakeryItems.clear();
 				%>
 			</select>
-			
+
 			<button type="submit" value="Submit" class="btn btn-default">Submit</button>
 			<p></p>
 		</form>

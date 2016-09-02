@@ -56,43 +56,43 @@
 	<div class="container img-rounded" style="background-color: white;">
 		<h1>Bakery Items</h1>
 		<!--  <div class="well well-sm">-->
-			<h3>See below for the list of available products:</h3>
+		<h3>See below for the list of available products:</h3>
 		<!--  </div>-->
-			<table class="table table-striped table-hover table-nonfluid" >
-				<thead>
-					<tr>
-						<th>Product ID</th>
-						<th>Type</th>
-						<th>Calories</th>
-						<th>Price</th>
-						<th>Topping</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						DAO.readFromDB();
-					%>
-					<%
-						BakeryItem readToJSP = new BakeryItem();
-						for (int i = 0; i < DAO.bakeryItems.size(); i++) {
-							readToJSP = DAO.bakeryItems.get(i);
-					%>
-					<tr>
-						<td><%=readToJSP.getProductID()%></td>
-						<td><%=readToJSP.getType()%></td>
-						<td><%=readToJSP.getCalories()%></td>
-						<td><%=readToJSP.getPrice()%></td>
-						<td><%=readToJSP.getTopping()%></td>
-					</tr>
-					<%
-						}
-					%>
-					<%
-						DAO.bakeryItems.clear();
-					%>
-				</tbody>
-			</table>
-		
+		<table class="table table-striped table-hover table-nonfluid">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Type</th>
+					<th>Calories</th>
+					<th>Price</th>
+					<th>Topping</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					DAO.readFromDB();
+				%>
+				<%
+					BakeryItem readToJSP = new BakeryItem();
+					for (int i = 0; i < DAO.bakeryItems.size(); i++) {
+						readToJSP = DAO.bakeryItems.get(i);
+				%>
+				<tr>
+					<td><%=readToJSP.getProductID()%></td>
+					<td><%=readToJSP.getType()%></td>
+					<td><%=readToJSP.getCalories()%></td>
+					<td><%=readToJSP.getPrice()%></td>
+					<td><%=readToJSP.getTopping()%></td>
+				</tr>
+				<%
+					}
+				%>
+				<%
+					DAO.bakeryItems.clear();
+				%>
+			</tbody>
+		</table>
+
 	</div>
 
 	<!-- jQuery -->

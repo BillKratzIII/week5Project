@@ -23,7 +23,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DELETE ITEM</title>
+<title>MODIFY ITEM</title>
 </head>
 <body class="full">
 	<!-- Navigation -->
@@ -45,8 +45,8 @@
 			<ul class="nav navbar-nav">
 				<li><a href="readDB.jsp">View Baked Goods</a></li>
 				<li><a href="addToDB.html">Add Item</a></li>
-				<li class="active"><a href="deleteItem.jsp">Delete Item</a></li>
-				<li><a href="modifyItem.jsp">Modify Item</a></li>
+				<li><a href="deleteItem.jsp">Delete Item</a></li>
+				<li class="active"><a href="modifyItem.jsp">Modify Item</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -54,7 +54,7 @@
 	<!-- /.container --> </nav>
 
 	<div class="container img-rounded" style="background-color: white;">
-		<h1>Delete An Item</h1>
+		<h1>Modify An Item</h1>
 		<table class="table table-striped table-hover table-nonfluid">
 			<thead>
 				<tr>
@@ -89,9 +89,9 @@
 				%>
 			</tbody>
 		</table>
-		<form action="deleteFromDB" method="post">
+		<form action="updateID" method="post">
 			<div class="well well-sm">
-				<h3>Select the product id of the item you would like to delete:</h3>
+			<h3>Select the product id of the item you would like to modify:</h3>
 			</div>
 			<select class="form-control" name="productID">
 				<%
@@ -111,6 +111,7 @@
 					DAO.bakeryItems.clear();
 				%>
 			</select>
+			
 			<button type="submit" value="Submit" class="btn btn-default">Submit</button>
 			<p></p>
 		</form>

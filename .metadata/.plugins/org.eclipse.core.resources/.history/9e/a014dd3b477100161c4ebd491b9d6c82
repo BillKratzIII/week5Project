@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DELETE ITEM</title>
+    <title>BAKERY HOME</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Bootcamp Bakery</a>
+                <a class="navbar-brand" href="#">Bootcamp Bakery</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,11 +51,11 @@
                     <li>
                         <a href="addToDB.html">Add Item</a>
                     </li>
-                    <li class="active">
-                        <a href="deleteFromDB.html">Delete Item</a>
+                    <li>
+                        <a href="deleteItem.jsp">Delete Item</a>
                     </li>
                     <li>
-                    	<a href="updateDB.html">Modify Item</a>
+                    	<a href="modifyItem.jsp">Modify Item</a>
                     </li>
                 </ul>
             </div>
@@ -65,28 +65,33 @@
     </nav>
 
     <div class="container img-rounded" style="background-color: white;">
-
-		<form action="deleteFromDB" method="post">
-			<h1>Delete An Item</h1>
-			<div class="well well-sm">
-				<h3>Enter the product id of the item you would like to delete:</h3>
-			</div>
-			<div class="form-group">
-				<label for="productID">Product ID</label> <input type="text"
-					name="productID" class="form-control" id="productID"
-					placeholder="product ID">
-			</div>
-			<button type="submit" value="Submit" class="btn btn-default">Submit</button>
-			<p></p>
-		</form>
-	</div>
+   		<div class="well well-sm">
+			<h3>Welcome to the Bootcamp Bakery!</h3>
+		</div>
+		<p>The bootcamp bakery produces the finest baked goods for the hard working students hungry from all the intense learning. Whether you are looking
+		for a sugar rush or protein packed nourishment we have it all! Stop in and try our great variety of products, baked fresh daily. We promise you will
+		not be dissapointed, or we'll refund your purchase!
+		</p>
+		<div class="well well-sm">
+			<h3>Hours of Operation</h3>
+		</div>
+		<ul>
+			<li>Monday: 8:30AM - 5:00PM</li>
+			<li>Tuesday: Telework Day</li>
+			<li>Wednesday: 8:30AM - 5:00PM</li>
+			<li>Thursday: 8:30AM - 5:00PM</li>
+			<li>Friday: Telework Day</li>
+			<li>Saturday: Closed</li>
+			<li>Sunday: Closed</li>
+		</ul>
+		
+    </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

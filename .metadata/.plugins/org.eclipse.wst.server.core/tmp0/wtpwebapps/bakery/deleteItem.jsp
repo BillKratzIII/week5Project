@@ -55,53 +55,53 @@
 
 	<div class="container img-rounded" style="background-color: white;">
 		<h1>Delete An Item</h1>
-		<table class="table table-striped table-hover table-nonfluid" >
-				<thead>
-					<tr>
-						<th>Product ID</th>
-						<th>Type</th>
-						<th>Calories</th>
-						<th>Price</th>
-						<th>Topping</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						DAO.readFromDB();
-					%>
-					<%
-						BakeryItem readToJSP = new BakeryItem();
-						for (int i = 0; i < DAO.bakeryItems.size(); i++) {
-							readToJSP = DAO.bakeryItems.get(i);
-					%>
-					<tr>
-						<td><%=readToJSP.getProductID()%></td>
-						<td><%=readToJSP.getType()%></td>
-						<td><%=readToJSP.getCalories()%></td>
-						<td><%=readToJSP.getPrice()%></td>
-						<td><%=readToJSP.getTopping()%></td>
-					</tr>
-					<%
-						}
-					%>
-					<%
-						DAO.bakeryItems.clear();
-					%>
-				</tbody>
-			</table>
+		<table class="table table-striped table-hover table-nonfluid">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Type</th>
+					<th>Calories</th>
+					<th>Price</th>
+					<th>Topping</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					DAO.readFromDB();
+				%>
+				<%
+					BakeryItem readToJSP = new BakeryItem();
+					for (int i = 0; i < DAO.bakeryItems.size(); i++) {
+						readToJSP = DAO.bakeryItems.get(i);
+				%>
+				<tr>
+					<td><%=readToJSP.getProductID()%></td>
+					<td><%=readToJSP.getType()%></td>
+					<td><%=readToJSP.getCalories()%></td>
+					<td><%=readToJSP.getPrice()%></td>
+					<td><%=readToJSP.getTopping()%></td>
+				</tr>
+				<%
+					}
+				%>
+				<%
+					DAO.bakeryItems.clear();
+				%>
+			</tbody>
+		</table>
 		<form action="deleteFromDB" method="post">
 			<div class="well well-sm">
-			<h3>Select the product id of the item you would like to delete:</h3>
+				<h3>Select the product id of the item you would like to delete:</h3>
 			</div>
 			<select class="form-control" name="productID">
-			<%
-				DAO.readFromDB();
-			%>
-			<%
-				for (int i = 0; i < DAO.bakeryItems.size(); i++) {
-					readToJSP = DAO.bakeryItems.get(i);
-			%>
-			
+				<%
+					DAO.readFromDB();
+				%>
+				<%
+					for (int i = 0; i < DAO.bakeryItems.size(); i++) {
+						readToJSP = DAO.bakeryItems.get(i);
+				%>
+
 				<option><%=readToJSP.getProductID()%></option>
 
 				<%
